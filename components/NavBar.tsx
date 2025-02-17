@@ -23,34 +23,26 @@ const NavBar = () => {
             <div className="flex cursor-pointer sm:items-center min-w-[36px]">
               <picture>
                 <source
-                  srcSet="/img/logotype-realms-blue-white.svg"
+                  srcSet="/img/logotype-xnet-blue-white.svg"
                   media="(min-width: 640px)"
                 />
-                <img src="/img/logo-realms.svg" className="w-8 h-8 sm:w-24" />
+                <img src="/img/logo-xnet.svg" className="w-8 h-8 sm:w-24" />
               </picture>
             </div>
           </Link>
-          <div
+          <a
+            href="https://www.google.com"
+            target="_blank"
+            rel="noreferrer"
             className="text-[#4deeea] neon-text cursor-pointer text-[15px] font-medium relative md:top-[1px]"
-            onMouseEnter={() => setShowTempPopup(true)}
-            onMouseLeave={() => setShowTempPopup(false)}
-            onTouchStart={() => setShowTempPopup(true)}
-            onTouchEnd={() => setShowTempPopup(false)}
-            onPointerEnter={() => setShowTempPopup(true)}
-            onPointerLeave={() => setShowTempPopup(true)}
           >
-            Leaderboard
-          </div>
-          {showTempPopup && (
-            <div className="p-2 border-[1px] border-[#df1fff] rounded-md absolute right-0 top-8 text-sm neon-box">
-              Coming Soon
-            </div>
-          )}
+            Link
+          </a>
         </div>
         <div className="flex items-center justify-end space-x-2 md:space-x-4">
           <a
             className="border-b border-transparent items-center cursor-pointer -mb-[1px] transition-colors hidden sm:flex hover:border-white"
-            href="https://docs.realms.today/"
+            href="https://xnet-mobile.gitbook.io/xnet-mobile-docs"
             target="_blank"
             rel="noreferrer"
           >
