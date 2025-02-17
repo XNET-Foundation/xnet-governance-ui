@@ -176,6 +176,7 @@ const JoinDAO = ({
             name: x.account.name,
             programId: x.owner.toBase58(),
             address: x.pubkey.toBase58(),
+            communityMint: x.account.communityMint.toBase58()
           })
         ))
   

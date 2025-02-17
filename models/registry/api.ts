@@ -107,6 +107,7 @@ export function createUnchartedRealmInfo(realm: UnchartedRealm) {
     symbol: realm.name,
     programId: new PublicKey(realm.programId),
     realmId: new PublicKey(realm.address),
+    communityMint: new PublicKey(realm.communityMint),
     displayName: realm.name,
     isCertified: false,
     enableNotifi: true, // enable by default
@@ -117,4 +118,5 @@ type UnchartedRealm = {
   name: string
   programId: string
   address: string
+  communityMint: string
 }

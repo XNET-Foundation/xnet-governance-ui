@@ -53,19 +53,28 @@ const Realms = () => {
       const [certifiedRealms] = await Promise.all([
         getCertifiedRealmInfos(connection),
       ])
-      const unchartedRealms =
-        queryRealms
-          ?.filter(
-            (x) => !certifiedRealms.find((y) => y.realmId.equals(x.pubkey)),
-          )
-          .map((x) =>
-            createUnchartedRealmInfo({
-              name: x.account.name,
-              programId: x.owner.toBase58(),
-              address: x.pubkey.toBase58(),
-            }),
-          ) ?? []
-      const allRealms = [...certifiedRealms, ...unchartedRealms]
+
+      const certifiedSelfHostedRealms = certifiedRealms.filter(
+        realm => realm.programId.toBase58() !== DEFAULT_GOVERNANCE_PROGRAM_ID
+      )
+
+      const uncharteredRealms =
+        queryRealms?.map((x) => {
+          const realm = certifiedRealms.find((y) => y.realmId.equals(x.pubkey))
+
+          if (realm) {
+            return {...realm, communityMint: x.account.communityMint}
+          }
+
+          return createUnchartedRealmInfo({
+            name: x.account.name,
+            programId: x.owner.toBase58(),
+            address: x.pubkey.toBase58(),
+            communityMint: x.account.communityMint.toBase58()
+          })
+        }) ?? []
+
+      const allRealms = [...certifiedSelfHostedRealms, ...uncharteredRealms]
 
       if (metadata) {
         const updatedRealms = allRealms.map((realm) => {
@@ -122,18 +131,28 @@ const Realms = () => {
       const filtered = realms.filter(
         (r) =>
           r.displayName?.toLowerCase().includes(v.toLowerCase()) ||
-          r.symbol?.toLowerCase().includes(v.toLowerCase()),
+          r.symbol?.toLowerCase().includes(v.toLowerCase()) ||
+          r.communityMint?.toBase58().toLowerCase().includes(v.toLowerCase())
       )
       setFilteredRealms(filtered)
     } else {
       setFilteredRealms(realms)
     }
   }
+
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between w-full mb-6">
         <h1 className="mb-4 sm:mb-0">DAOs</h1>
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-4 items-center grow">
+          <Input
+            className="pl-8 md:ml-4 ml-2"
+            value={searchString}
+            type="text"
+            onChange={(e) => filterDaos(e.target.value)}
+            placeholder={`DAO Checker - Enter DAO name or Mint Address`}
+            prefix={<SearchIcon className="w-5 h-5 text-fgd-3 md:ml-4 ml-2" />}
+          />
           <div className="w-10 h-10">
             <button
               className="bg-bkg-2 default-transition flex items-center justify-center h-10 rounded-full w-10 hover:bg-bkg-3"
@@ -146,14 +165,6 @@ const Realms = () => {
               )}
             </button>
           </div>
-          <Input
-            className="pl-8"
-            value={searchString}
-            type="text"
-            onChange={(e) => filterDaos(e.target.value)}
-            placeholder={`Search DAOs...`}
-            prefix={<SearchIcon className="w-5 h-5 text-fgd-3" />}
-          />
           {!editingGrid && (
             <Button
               className="whitespace-nowrap"

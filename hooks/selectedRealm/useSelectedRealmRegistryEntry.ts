@@ -59,6 +59,7 @@ export const useSelectedRealmInfo = () => {
             programId: realm.owner.toBase58(),
             address: realm.pubkey.toBase58(),
             name: realm.account.name,
+            communityMint: realm.account.communityMint.toBase58()
           }),
     [realm],
   )
