@@ -58,9 +58,6 @@ import { useVotingClients } from '@hooks/useVotingClients'
 import { useRealmVoterWeightPlugins } from '@hooks/useRealmVoterWeightPlugins'
 import { useGetOnchainMetadata } from '@hooks/useOnchainMetadata'
 
-const AccountsCompactWrapper = dynamic(
-  () => import('@components/TreasuryAccount/AccountsCompactWrapper'),
-)
 const AssetsCompactWrapper = dynamic(
   () => import('@components/AssetsList/AssetsCompactWrapper'),
 )
@@ -68,7 +65,6 @@ const NFTSCompactWrapper = dynamic(
   () => import('@components/NFTS/NFTSCompactWrapper'),
 )
 const ProposalCard = dynamic(() => import('components/ProposalCard'))
-const RealmHeader = dynamic(() => import('components/RealmHeader'))
 const DepositLabel = dynamic(
   () => import('@components/TreasuryAccount/DepositLabel'),
 )
@@ -406,21 +402,23 @@ const REALM = () => {
       <div className="grid grid-cols-12 gap-4">
         {realmQuery.isLoading ? (
           <>
-            <div className={`col-span-12 md:col-span-7 lg:col-span-8`}>
-              <div className="animate-pulse bg-bkg-3 h-full rounded-lg w-full" />
+            <div className="col-span-12 space-y-4">
+              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
+              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
+              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
             </div>
-            <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-4">
-              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
-              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
-              <div className="animate-pulse bg-bkg-3 h-64 rounded-lg w-full" />
+            <div className="col-span-12">
+              <div className="animate-pulse bg-bkg-3 h-full rounded-lg w-full" />
             </div>
           </>
         ) : realmQuery.data?.result !== undefined ? (
           <>
-            <div
-              className={`bg-bkg-2 col-span-12 md:col-span-7 md:order-first lg:col-span-8 order-last rounded-lg`}
-            >
-              <RealmHeader />
+            <div className="col-span-12 space-y-4">
+              <TokenBalanceCardWrapper />
+              {!process?.env?.DISABLE_NFTS && <NFTSCompactWrapper />}
+              <AssetsCompactWrapper />
+            </div>
+            <div className="col-span-12 bg-bkg-2 rounded-lg">
               <div className="p-4 md:p-6 ">
                 <div>
                   {realmInfo?.bannerImage || realmData?.bannerImage ? (
@@ -535,12 +533,6 @@ const REALM = () => {
                 )}
                 {activeTab === 'About' && <AboutRealm />}
               </div>
-            </div>
-            <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-4">
-              <TokenBalanceCardWrapper />
-              {!process?.env?.DISABLE_NFTS && <NFTSCompactWrapper />}
-              <AccountsCompactWrapper />
-              <AssetsCompactWrapper />
             </div>
           </>
         ) : (
