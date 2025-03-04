@@ -45,12 +45,12 @@ const TermsPopupModal = () => {
           hideClose={true}
         >
           <p className="text-justify">
-            The operating entity of this site and owner of the related
-            intellectual property has changed. The new operator is Realms Today
-            Ltd. (the New Operator). We have accordingly amended the Terms and
-            the Private Policy governing the relationship between our users and
-            the New Operator. By clicking "accept", you represent and warrant
-            that you agree to the revised Terms and Private Policy.
+          XNET’s governance is driven by those who stake PST (Proof of Staking) tokens, 
+          giving them the power to vote on key decisions that shape the network. PST tokens 
+          are earned by staking XNET for rewards, which can be done through the Staking page. 
+          Your voting power scales with your stake, ensuring that active participants have a meaningful impact. 
+          Note that staked PST may be subject to a locking period before withdrawal. By clicking "Accept," you 
+          confirm your participation under these terms and commit to shaping the future of XNET.
           </p>
           <div className="flex gap-4 mt-4 justify-center">
             <Button onClick={acceptTerms}>Accept</Button>
