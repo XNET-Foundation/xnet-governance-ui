@@ -15,7 +15,8 @@ const navigation = [
   { name: 'Governance', href: 'https://discord.gg/xnet', external: true },
   { name: 'Grants', href: '/grants', external: false },
   { name: 'Merch', href: 'https://fostermarketplace.app/XNET%20Foundation/merch', external: true },
-  { name: 'Deployer Rewards', href: 'https://dashboard.xnetfoundation.org', external: true },
+  { name: 'Dashboard', href: 'https://dashboard.xnetfoundation.org', external: true },
+  { name: 'Staking', href: 'https://google.com', external: true },
 ]
 
 const NavBar = () => {
