@@ -12,11 +12,11 @@ const ConnectWalletButtonDynamic = dynamic(
 )
 
 const navigation = [
-  { name: 'Governance', href: 'https://discord.gg/xnet', external: true },
-  { name: 'Grants', href: '/grants', external: false },
+  { name: 'Governance', href: 'https://governance.xnetfoundation.org/', external: true },
+  { name: 'Staking', href: '/staking', external: false },
+  { name: 'Dash', href: 'https://dashboard.xnetfoundation.org/', external: true },
+  { name: 'Grants', href: '/grants', external: true },
   { name: 'Merch', href: 'https://fostermarketplace.app/XNET%20Foundation/merch', external: true },
-  { name: 'Dashboard', href: 'https://dashboard.xnetfoundation.org', external: true },
-  { name: 'Staking', href: 'https://google.com', external: true },
 ]
 
 const NavBar = () => {
@@ -28,7 +28,7 @@ const NavBar = () => {
       <header className="fixed inset-x-0 top-0 z-50 h-20 bg-black/70 backdrop-blur-md border-b border-white/[0.1]">
         <nav className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Global">
           <div className="flex items-center">
-            <Link href={fmtUrlWithCluster('/realms')}>
+            <Link href={fmtUrlWithCluster('https://governance.xnetfoundation.org/')}>
               <a className="flex items-center">
                 <span className="sr-only">XNET Foundation</span>
                 {/* Fixed logo dimensions to maintain aspect ratio */}
